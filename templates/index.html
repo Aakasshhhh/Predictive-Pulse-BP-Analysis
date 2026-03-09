@@ -3,195 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predictive Pulse - Cardiovascular Assessment</title>
-    <!-- Modern Font: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Predictive Pulse - Medical Assessment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-
-    <div class="dashboard-container">
-        
-        <header class="dashboard-header">
-            <div class="header-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    <div class="medical-dashboard">
+        <div class="dashboard-header">
+            <div class="header-content">
+                <div class="medical-logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                    </svg>
+                </div>
+                <h1>Predictive Pulse</h1>
+                <p>Cardiovascular Risk Assessment System</p>
             </div>
-            <h1>Predictive Pulse</h1>
-            <p>Advanced Clinical Cardiovascular Risk Assessment Platform</p>
-        </header>
+        </div>
 
-        <div class="dashboard-content">
-            
-            <div class="form-card">
-                <h2>Patient Assessment Form</h2>
-                <p class="form-subtitle">Please fill in the clinical parameters below to generate a real-time predictive risk assessment.</p>
+        <div class="dashboard-main">
+            <div class="assessment-form">
+                <div class="form-header">
+                    <h2>Patient Assessment Form</h2>
+                    <p>Enter patient information for cardiovascular risk evaluation</p>
+                </div>
 
-                <form action="/predict" method="POST" class="assessment-form">
-                    
-                    <div class="form-grid">
-                        
-                        <div class="input-group">
-                            <label for="gender">Gender</label>
-                            <select name="gender" id="gender" required>
-                                <option value="" disabled selected>Select Gender</option>
-                                <option value="1">Male</option>
-                                <option value="0">Female</option>
-                            </select>
+                <form action="/predict" method="POST" class="medical-form">
+                    <!-- Patient Information -->
+                    <div class="form-section">
+                        <h3>Patient Information</h3>
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label for="age">Age (Years)</label>
+                                <input type="number" name="age" id="age" placeholder="e.g., 45" required min="1" max="120">
+                            </div>
+                            <div class="form-field">
+                                <label for="gender">Gender</label>
+                                <select name="gender" id="gender" required>
+                                    <option value="" disabled selected>Select Gender</option>
+                                    <option value="1">Male</option>
+                                    <option value="0">Female</option>
+                                </select>
+                            </div>
                         </div>
+                    </div>
 
-                        <div class="input-group">
-                            <label for="age">Age</label>
-                            <input type="number" name="age" id="age" placeholder="e.g., 45" required min="1" max="120">
+                    <!-- Vital Signs -->
+                    <div class="form-section">
+                        <h3>Vital Signs</h3>
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label for="systolic">Systolic BP (mmHg)</label>
+                                <input type="number" name="systolic" id="systolic" placeholder="e.g., 120" required min="50" max="250">
+                            </div>
+                            <div class="form-field">
+                                <label for="diastolic">Diastolic BP (mmHg)</label>
+                                <input type="number" name="diastolic" id="diastolic" placeholder="e.g., 80" required min="30" max="150">
+                            </div>
                         </div>
+                    </div>
 
-                        <div class="input-group">
-                            <label for="family_history">Family History</label>
-                            <select name="family_history" id="family_history" required>
-                                <option value="" disabled selected>Select History</option>
-                                <option value="1">Yes</option>
-                                <option value="0">No</option>
-                            </select>
+                    <!-- Medical History -->
+                    <div class="form-section">
+                        <h3>Medical History</h3>
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label for="family_history">Family History of CVD</label>
+                                <select name="family_history" id="family_history" required>
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="diagnosis_time">Years Since Diagnosis</label>
+                                <select name="diagnosis_time" id="diagnosis_time" required>
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="1">Less than 1 Year</option>
+                                    <option value="2">1-5 Years</option>
+                                    <option value="3">More than 5 Years</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="medication">BP Medication</label>
+                                <select name="medication" id="medication" required>
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="medical_care">Under Medical Care</label>
+                                <select name="medical_care" id="medical_care" required>
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
                         </div>
+                    </div>
 
-                        <div class="input-group">
-                            <label for="medical_care">Under Medical Care</label>
-                            <select name="medical_care" id="medical_care" required>
-                                <option value="" disabled selected>Select Status</option>
-                                <option value="1">Yes</option>
-                                <option value="0">No</option>
-                            </select>
+                    <!-- Symptoms -->
+                    <div class="form-section">
+                        <h3>Clinical Symptoms</h3>
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label for="severity">Symptom Severity</label>
+                                <select name="severity" id="severity" required>
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="1">Mild</option>
+                                    <option value="2">Severe</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="breath">Shortness of Breath</label>
+                                <select name="breath" id="breath" required>
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="vision">Vision Problems</label>
+                                <select name="vision" id="vision" required>
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="nosebleed">Frequent Nosebleeds</label>
+                                <select name="nosebleed" id="nosebleed" required>
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
                         </div>
+                    </div>
 
-                        <div class="input-group">
-                            <label for="medication">BP Medication</label>
-                            <select name="medication" id="medication" required>
-                                <option value="" disabled selected>Select Status</option>
-                                <option value="1">Yes</option>
-                                <option value="0">No</option>
-                            </select>
+                    <!-- Lifestyle -->
+                    <div class="form-section">
+                        <h3>Lifestyle Factors</h3>
+                        <div class="form-grid">
+                            <div class="form-field full-width">
+                                <label for="diet">Heart Healthy Diet</label>
+                                <select name="diet" id="diet" required>
+                                    <option value="" disabled selected>Select Diet Status</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
                         </div>
-
-                        <div class="input-group">
-                            <label for="severity">Symptom Severity</label>
-                            <select name="severity" id="severity" required>
-                                <option value="" disabled selected>Select Severity</option>
-                                <option value="1">Mild</option>
-                                <option value="2">Severe</option>
-                            </select>
-                        </div>
-
-                        <div class="input-group">
-                            <label for="breath">Shortness of Breath</label>
-                            <select name="breath" id="breath" required>
-                                <option value="" disabled selected>Select Status</option>
-                                <option value="1">Yes</option>
-                                <option value="0">No</option>
-                            </select>
-                        </div>
-
-                        <div class="input-group">
-                            <label for="vision">Vision Change</label>
-                            <select name="vision" id="vision" required>
-                                <option value="" disabled selected>Select Status</option>
-                                <option value="1">Yes</option>
-                                <option value="0">No</option>
-                            </select>
-                        </div>
-
-                        <div class="input-group">
-                            <label for="nosebleed">Frequent Nosebleed</label>
-                            <select name="nosebleed" id="nosebleed" required>
-                                <option value="" disabled selected>Select Status</option>
-                                <option value="1">Yes</option>
-                                <option value="0">No</option>
-                            </select>
-                        </div>
-
-                        <div class="input-group">
-                            <label for="diagnosis_time">Diagnosis Time</label>
-                            <select name="diagnosis_time" id="diagnosis_time" required>
-                                <option value="" disabled selected>Select Time</option>
-                                <option value="1">Less than 1 Year</option>
-                                <option value="2">1-5 Years</option>
-                                <option value="3">More than 5 Years</option>
-                            </select>
-                        </div>
-
-                        <div class="input-group">
-                            <label for="systolic">Systolic Pressure (mmHg)</label>
-                            <input type="number" name="systolic" id="systolic" placeholder="e.g., 120" required min="50" max="250">
-                        </div>
-
-                        <div class="input-group">
-                            <label for="diastolic">Diastolic Pressure (mmHg)</label>
-                            <input type="number" name="diastolic" id="diastolic" placeholder="e.g., 80" required min="30" max="150">
-                        </div>
-
-                        <div class="input-group input-full-width">
-                            <label for="diet">Heart Healthy Diet</label>
-                            <select name="diet" id="diet" required>
-                                <option value="" disabled selected>Select Diet Status</option>
-                                <option value="1">Yes</option>
-                                <option value="0">No</option>
-                            </select>
-                        </div>
-
                     </div>
 
                     <button type="submit" class="submit-btn">
                         <span>Generate Risk Assessment</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
                     </button>
-
                 </form>
 
+                <!-- Results Section -->
                 {% if prediction_text %}
-                <div class="result-card {% if risk == 'HIGH RISK' %}risk-high{% elif risk == 'MODERATE RISK' %}risk-moderate{% else %}risk-low{% endif %}">
+                <div class="results-card {% if risk == 'HIGH RISK' %}high-risk{% elif risk == 'MODERATE RISK' %}moderate-risk{% elif risk == 'CRITICAL RISK' %}critical-risk{% else %}normal-risk{% endif %}">
                     <div class="result-header">
-                        <h3>Assessment Result</h3>
-                        <span class="risk-badge">{{ risk }}</span>
+                        <h3>Assessment Results</h3>
                     </div>
-                    <p class="prediction-text">{{ prediction_text }}</p>
+                    <div class="result-content">
+                        <div class="risk-level">{{ prediction_text }}</div>
+                        <div class="risk-badge">{{ risk }}</div>
+                    </div>
                 </div>
                 {% endif %}
-
             </div>
 
-            <div class="info-sidebar">
-                <div class="info-card">
+            <!-- Medical Information Panel -->
+            <div class="info-panel">
+                <div class="info-content">
                     <h3>About This System</h3>
-                    <p>
-                        Our AI-powered platform analyzes multiple cardiovascular risk
-                        factors using machine learning algorithms trained on expansive clinical diagnostic data.
-                    </p>
-                    <ul class="feature-list">
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                            Evidence-based risk assessment
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                            Clinical guideline compliance
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                            Personalized recommendations
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                            Professional medical support
-                        </li>
+                    <p>This AI-powered platform analyzes cardiovascular risk factors using machine learning algorithms trained on clinical data.</p>
+                    <ul class="features">
+                        <li>✓ Evidence-based risk assessment</li>
+                        <li>✓ Clinical guideline compliance</li>
+                        <li>✓ Real-time evaluation</li>
+                        <li>✓ Professional medical support</li>
                     </ul>
+                    <div class="disclaimer">
+                        <strong>⚠️ Important:</strong> For clinical reference only. Consult healthcare professionals for diagnosis and treatment.
+                    </div>
                 </div>
             </div>
-
         </div>
 
-        <footer class="dashboard-footer">
-            <p>&copy; 2026 Predictive Pulse AI Systems. For clinical reference only.</p>
-        </footer>
-
+        <div class="dashboard-footer">
+            <p>&copy; 2026 Predictive Pulse Medical Systems</p>
+        </div>
     </div>
-
 </body>
 </html>
